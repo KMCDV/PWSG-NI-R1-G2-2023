@@ -469,7 +469,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -811,8 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3851bdea6a62b2e4383e75f39405222a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPlayerScoreText: {fileID: 0}
-  rightPlayerScoreText: {fileID: 0}
+  leftPlayerScoreText: {fileID: 1702194056}
+  rightPlayerScoreText: {fileID: 711390120}
   leftPlayerScore: 0
   rightPlayerScore: 0
 --- !u!114 &1198548403
@@ -1252,6 +1252,7 @@ MonoBehaviour:
   speed: 7
   vel: {x: 0, y: 0, z: 0}
   isPlaying: 0
+  scoreManager: {fileID: 1198548402}
 --- !u!61 &2127482129
 BoxCollider2D:
   m_ObjectHideFlags: 0
