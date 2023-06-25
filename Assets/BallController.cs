@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BallController : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class BallController : MonoBehaviour
     public bool isPlaying;
     public ScoreManager scoreManager;
 
+    public float spinForce;
+    public int multiplier = 0;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +32,14 @@ public class BallController : MonoBehaviour
 
         if (rb2D.velocity.magnitude < speed * 0.5f)
             ResetBall();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 curveForce = vel;
+        curveForce.x *= Vector2.up.x * (multiplier * spinForce);
+        curveForce.y *= Vector2.up.y * (multiplier * spinForce);
+        rb2D.AddForce( curveForce, ForceMode2D.Force);
     }
 
     private void ResetBall()
@@ -60,6 +74,20 @@ public class BallController : MonoBehaviour
         newVelocityWithOffset += new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
         rb2D.velocity = newVelocityWithOffset.normalized * speed;
         vel = rb2D.velocity;
+        //multiplier = 0;
+        
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        
+        if(playerController == null)
+            return;
+
+        if( playerController.IsDownKeyPressed())
+            multiplier = 1;
+        else
+        if (playerController.IsUpKeyPressed())
+            multiplier = -1;
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
